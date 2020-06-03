@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,11 +64,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
+        //we use the Glide library to look and download the image from the URL save within our BookList
+        // and set it within the holder Book Image View
         Glide.with(mContext)
                 .asBitmap()
                 .load(mBooks.get(position).getImageLink())
                 .into(holder.mBookImage);
 
+        //we set each book title and book authors to the corresponding TextView within our viewHolder
         holder.mBookTitle.setText(mBooks.get(position).getTitle());
         holder.mBookAuthors.setText(mBooks.get(position).getAuthors());
 
@@ -79,10 +82,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
         return mBooks.size();
     }
 
+    //we create our RecyclerView.ViewHolder Class
     public class MyViewHolder extends RecyclerView.ViewHolder{
+        // we declare the views that we are going to use in our viewHolder
         private TextView mBookTitle, mBookAuthors;
         private ImageView mBookImage;
 
+        // we refer to the corresponding views in our item layout
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -93,11 +99,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
         }
     }
 
+    //method to clear the books within the adapter
     void clear(){
         mBooks.clear();
         this.notifyDataSetChanged();
     }
 
+    //method to add new books to the adapter
     void addAll(List<Book> books){
         mBooks = books;
         this.notifyDataSetChanged();

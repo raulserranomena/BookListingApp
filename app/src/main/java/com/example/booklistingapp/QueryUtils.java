@@ -198,7 +198,7 @@ public class QueryUtils {
                             authors.append(authorsArray.get(j).toString());
                         }
                     }
-                    // If there's no author, extract the key "publisher"
+                    // If there's no "authors" key, add "No Authors Found"
                 }catch (JSONException e){
                     authors.append("No Authors found");
 
