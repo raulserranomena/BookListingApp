@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +63,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: called");
+
+        Glide.with(mContext)
+                .asBitmap()
+                .load(mBooks.get(position).getImageLink())
+                .into(holder.mBookImage);
+
         holder.mBookTitle.setText(mBooks.get(position).getTitle());
         holder.mBookAuthors.setText(mBooks.get(position).getAuthors());
 
@@ -72,12 +81,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView mBookTitle, mBookAuthors;
+        private ImageView mBookImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             mBookTitle = itemView.findViewById(R.id.book_title_text_view);
             mBookAuthors = itemView.findViewById(R.id.book_authors_text_view);
+            mBookImage = itemView.findViewById(R.id.book_image_view);
 
         }
     }
