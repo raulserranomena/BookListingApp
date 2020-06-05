@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     //get the text to search
                     mSearchQuery = mSearchTextView.getText().toString();
+                    mSearchQuery = mSearchQuery.replaceAll(" ", "+");
 
                     //If there is no text to search, show a toast
                     if (mSearchQuery.isEmpty()) {
